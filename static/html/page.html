@@ -1,0 +1,50 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="posts-outer">
+    <div class="posts-inner">
+        <div class="profile-inf" id='profile-inf'></div>
+        <div class="posts-header">
+            
+            <div class="row" style="margin: 6px; width: auto;">
+                <div class="col">
+                    <div class="">
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-sm" style="margin-left:30%;" id="post-input">
+                    </div>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-secondary" style="margin-left:30%;" id="post-send-submit">post</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="posts-list" id="posts-list"> </div>
+    </div>
+</div>
+
+<template id="post-template">
+    <div class="posts-object">
+        <div class="posts-inf">
+            <div class="posts-owner" id="posts-owner"></div>
+            <div class="posts-time" id="posts-time"></div>
+        </div>
+        <img style="margin: 10px 10px;">
+        <div class="posts-content" style="margin: 10px 10px;" id="posts-content"></div>
+    </div>
+</template>
+<script type="text/javascript">
+    var user_id = window.location.href.split("/");
+    loadFeedPosts(user_id[3]);
+    loadUserData(user_id[3]);
+    function postPost(content) {
+    const sendPostPromise = sendPost(content);
+    sendPostPromise.then(data => {
+        loadFeedPosts(user_id[3]);
+    })
+}
+
+</script>
+
+{% endblock %}
